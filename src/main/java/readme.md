@@ -1,24 +1,49 @@
 ```mermaid
 classDiagram
-class Customer {
--id:int
--name:String
--email:String
-}
+
+    class Customer {
+        -id:int
+        -name:String
+        -email:String
+        -orderHistory: List~Order~
+        +addOrder(order:Order)
+        +getOrderHistory(): List~Order~
+    }
 
     class Product {
         -id:int
         -name:String
         -price:double
+        -category:String
     }
 
     class Order {
         -id:int
-        -totalPrice:double
+        -customer:Customer
+        -products: List~Product~
+        +addProduct(product:Product)
+        +getTotalPrice():double
+        +printSummary()
     }
 
-    Order "0..*" --> "1" Customer : belongsTo
+    class ProductCatalog {
+        -products: List~Product~
+        +addProduct(product:Product)
+        +getById(id:int):Product
+        +getAll():List~Product~
+    }
+
+    class OrderService {
+        -nextOrderId:int
+        +createOrder(customer:Customer, products:List~Product~):Order
+    }
+
+%% Relationships
+    Customer "1" --> "0..*" Order : has
     Order "1" --> "1..*" Product : contains
+    ProductCatalog "1" --> "0..*" Product : stores
+    OrderService "1" --> "0..*" Order : creates
+
 ```
 
 
@@ -62,3 +87,19 @@ gonna try add the optional task to
     - What you added
     - Why you added it
     - How it improves the system
+
+Old limitations:
+No menu
+no loops
+no services
+no catalog
+and it was hard coded
+
+New features:
+uses a ProductCatalog class to manage products
+uses an OrderService class to handle order creation and management
+menu loop with options to view products, create orders, and view order history
+
+cleaner and more modular design
+
+i added this to improve so much easier to read , maintain and expand.

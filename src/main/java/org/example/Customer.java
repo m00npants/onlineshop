@@ -1,9 +1,14 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
+
     private int id;
     private String name;
     private String email;
+    private List<Order> orderHistory = new ArrayList<>();
 
     public Customer(int id, String name, String email) {
         this.id = id;
@@ -23,15 +28,16 @@ public class Customer {
         return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void addOrder(Order order) {
+        orderHistory.add(order);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<Order> getOrderHistory() {
+        return orderHistory;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public String toString() {
+        return id + ": " + name + " (" + email + ")";
     }
 }
