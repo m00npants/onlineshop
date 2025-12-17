@@ -25,4 +25,9 @@ public class ProductCatalog {
             System.out.println(p.toString());
         }
     }
+
+    public List<Product> getAll() {
+        return products;
+    }
+
 }

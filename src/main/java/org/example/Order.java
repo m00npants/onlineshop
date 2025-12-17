@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,4 +58,22 @@ public class Order {
         }
         System.out.println("Totalt: " + getTotalPrice() + " kr");
     }
+
+    public String toText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order ID: ").append(id).append("\n");
+        sb.append("Kund: ").append(customer.getName()).append("\n");
+        sb.append("Produkter:\n");
+        for (Product p : products) {
+            sb.append("  - ").append(p.getId()).append(": ").append(p.getName())
+                    .append(" (").append(p.getPrice()).append(" kr)\n");
+        }
+        sb.append("Totalt: ").append(getTotalPrice()).append(" kr\n");
+        return sb.toString();
+    }
+
+    public void printSummaryTo(JTextArea area) {
+        area.setText(toText());
+    }
+
 }

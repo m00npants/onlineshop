@@ -5,3 +5,13 @@ public class Main {
         new App().run();
     }
 }
+
+// change to this if you want to run GUI without console seeding
+
+/*public class Main {
+     static void main() {
+        App app = new App();
+        app.runWithoutConsole(); // new method that only seeds data
+        new ShopGUI(app);
+    }
+}*/

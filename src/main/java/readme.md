@@ -105,6 +105,7 @@ gonna try add the optional task to
     - clenaner and more modular design
     - easier to read , maintain and expand.
     - you can now remove products from orders
+    - Added an alternative to start the app with UI
     
 
 

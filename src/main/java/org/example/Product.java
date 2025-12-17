@@ -34,5 +34,6 @@ public class Product {
     public String toString() {
         return id + " - " + name + " (" + category + ") " + price + " kr";
     }
+
 }
 

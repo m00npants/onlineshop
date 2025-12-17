@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -218,4 +219,148 @@ public class App {
             System.out.println("Ingen produkt med det ID:t i ordern.");
         }
     }
+
+
+    //GUI
+    public String getCustomersAsText() {
+        StringBuilder sb = new StringBuilder("Kunder:\n");
+        for (Customer c : customers) {
+            sb.append(c.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+    public String getProductsAsText() {
+        StringBuilder sb = new StringBuilder("Produkter:\n");
+        for (Product p : catalog.getAll()) {
+            sb.append(p.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+    public void createOrderSwing(JFrame parent, JTextArea output) {
+        String idStr = JOptionPane.showInputDialog(parent, "Ange kund-ID:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+        Customer customer = customers.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (customer == null) {
+            JOptionPane.showMessageDialog(parent, "Kund hittades inte.");
+            return;
+        }
+
+        List<Product> chosen = new ArrayList<>();
+        boolean adding = true;
+
+        while (adding) {
+            String productIdStr = JOptionPane.showInputDialog(parent,
+                    getProductsAsText() + "\nAnge produkt-ID (0 för att avsluta):");
+
+            if (productIdStr == null) return;
+
+            int pid = Integer.parseInt(productIdStr);
+
+            if (pid == 0) {
+                adding = false;
+            } else {
+                Product p = catalog.getById(pid);
+                if (p != null) {
+                    chosen.add(p);
+                }
+            }
+        }
+
+        if (chosen.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "Ingen produkt vald.");
+            return;
+        }
+
+        Order order = orderService.createOrder(customer, chosen);
+        orders.add(order);
+
+        output.setText("Order skapad:\n");
+        order.printSummaryTo(output);
+    }
+    public void showOrdersSwing(JFrame parent, JTextArea output) {
+        String idStr = JOptionPane.showInputDialog(parent, "Ange kund-ID:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+
+        Customer customer = customers.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (customer == null) {
+            JOptionPane.showMessageDialog(parent, "Kund hittades inte.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("Orders för " + customer.getName() + ":\n");
+
+        for (Order o : customer.getOrderHistory()) {
+            sb.append("-----------------------------\n");
+            sb.append(o.toText());
+        }
+
+        output.setText(sb.toString());
+    }
+    public void removeProductSwing(JFrame parent, JTextArea output) {
+        String idStr = JOptionPane.showInputDialog(parent, "Ange kund-ID:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+
+        Customer customer = customers.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (customer == null) {
+            JOptionPane.showMessageDialog(parent, "Kund hittades inte.");
+            return;
+        }
+
+        String orderIdStr = JOptionPane.showInputDialog(parent, "Ange order-ID:");
+        if (orderIdStr == null) return;
+
+        int orderId = Integer.parseInt(orderIdStr);
+
+        Order order = customer.getOrderHistory().stream()
+                .filter(o -> o.getId() == orderId)
+                .findFirst()
+                .orElse(null);
+
+        if (order == null) {
+            JOptionPane.showMessageDialog(parent, "Order hittades inte.");
+            return;
+        }
+
+        String productIdStr = JOptionPane.showInputDialog(parent,
+                order.toText() + "\nAnge produkt-ID att ta bort:");
+
+        if (productIdStr == null) return;
+
+        int productId = Integer.parseInt(productIdStr);
+
+        if (order.removeProduct(productId)) {
+            JOptionPane.showMessageDialog(parent, "Produkten togs bort.");
+        } else {
+            JOptionPane.showMessageDialog(parent, "Produkten fanns inte i ordern.");
+        }
+
+        output.setText(order.toText());
+    }
+
+    public void runWithoutConsole() {
+        seedCustomers();
+        seedProducts();
+    }
+
+
+
+
 }
