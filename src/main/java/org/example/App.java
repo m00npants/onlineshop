@@ -523,6 +523,45 @@ public class App {
         output.setText("Kunden har tagits bort:\n" + toRemove.toString());
     }
 
+    public void editCustomerSwing(JFrame parent, JTextArea output) {
+
+        String idStr = JOptionPane.showInputDialog(parent, "Ange ID på kunden som ska redigeras:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+
+        Customer customer = null;
+
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                customer = c;
+                break;
+            }
+        }
+
+        if (customer == null) {
+            JOptionPane.showMessageDialog(parent, "Ingen kund med detta ID.");
+            return;
+        }
+
+        String newName = JOptionPane.showInputDialog(parent,
+                "Nytt namn (lämna tomt för att behålla):", customer.getName());
+
+        if (newName != null && !newName.isEmpty()) {
+            customer.setName(newName);
+        }
+
+        String newEmail = JOptionPane.showInputDialog(parent,
+                "Ny email (lämna tomt för att behålla):", customer.getEmail());
+
+        if (newEmail != null && !newEmail.isEmpty()) {
+            customer.setEmail(newEmail);
+        }
+
+        output.setText("Kunden har uppdaterats:\n" + customer.toString());
+    }
+
+
 
 
 

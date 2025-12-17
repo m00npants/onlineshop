@@ -108,6 +108,7 @@ gonna try add the optional task to
     - Added an alternative to start the app with UI
     - added so you can add a new customer
     - added so you can delete a customer
+    - added an option to manage customer (change name and email)
     
 
 
