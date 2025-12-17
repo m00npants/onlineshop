@@ -88,18 +88,20 @@ gonna try add the optional task to
     - Why you added it
     - How it improves the system
 
-Old limitations:
-No menu
-no loops
-no services
-no catalog
-and it was hard coded
 
-New features:
-uses a ProductCatalog class to manage products
-uses an OrderService class to handle order creation and management
-menu loop with options to view products, create orders, and view order history
+- Old limitations:
+    - No Menu
+    - No loops
+    - no Catalog
+    - it was hard coded
 
-cleaner and more modular design
 
-i added this to improve so its much easier to read , maintain and expand.
+- New features:
+    - uses a ProductCatalog class to manage products
+    - uses an OrderService class to handle order creation and management
+    - Uses loops and a menu with options to view products, create orders, and view order history
+    - clenaner and more modular design
+    - easier to read , maintain and expand.
+    
+
+
