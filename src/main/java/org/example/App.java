@@ -27,7 +27,8 @@ public class App {
             System.out.println("2. Visa produktkatalog");
             System.out.println("3. Skapa order för kund");
             System.out.println("4. Visa orders för kund");
-            System.out.println("5. Avsluta");
+            System.out.println("5. Ta bort produkt från order");
+            System.out.println("6. Avsluta");
             System.out.print("Val: ");
 
             int choice = readInt();
@@ -46,6 +47,9 @@ public class App {
                     handleShowCustomerOrders();
                     break;
                 case 5:
+                    handleRemoveProduct();
+                    break;
+                case 6:
                     System.out.println("Avslutar programmet...");
                     running = false;
                     break;
@@ -167,5 +171,51 @@ public class App {
             scanner.next(); // rensa felaktig input
         }
         return scanner.nextInt();
+    }
+
+    private void handleRemoveProduct() {
+        Customer customer = chooseCustomer();
+
+        if (customer.getOrderHistory().isEmpty()) {
+            System.out.println("Kunden har inga orders.");
+            return;
+        }
+
+        System.out.println("Välj order:");
+        for (Order o : customer.getOrderHistory()) {
+            System.out.println("Order ID: " + o.getId());
+        }
+
+        System.out.print("Ange order-ID: ");
+        int orderId = readInt();
+
+        Order selectedOrder = null;
+        for (Order o : customer.getOrderHistory()) {
+            if (o.getId() == orderId) {
+                selectedOrder = o;
+                break;
+            }
+        }
+
+        if (selectedOrder == null) {
+            System.out.println("Order hittades inte.");
+            return;
+        }
+
+        System.out.println("Produkter i ordern:");
+        for (Product p : selectedOrder.getProducts()) {
+            System.out.println(p.getId() + ": " + p.getName() + " (" + p.getPrice() + " kr)");
+        }
+
+        System.out.print("Ange produkt-ID att ta bort: ");
+        int productId = readInt();
+
+        boolean removed = selectedOrder.removeProduct(productId);
+
+        if (removed) {
+            System.out.println("Produkten togs bort.");
+        } else {
+            System.out.println("Ingen produkt med det ID:t i ordern.");
+        }
     }
 }

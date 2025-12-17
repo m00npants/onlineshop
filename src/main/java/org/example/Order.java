@@ -14,15 +14,31 @@ public class Order {
         this.customer = customer;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public Customer getCustomer() {
+        return customer;
+    }
 
-
+    public List<Product> getProducts() {
+        return products;
+    }
 
     public void addProduct(Product product) {
         products.add(product);
     }
 
-
+    public boolean removeProduct(int productId) {
+        for (Product p : products) {
+            if (p.getId() == productId) {
+                products.remove(p);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public double getTotalPrice() {
         double sum = 0;
@@ -37,7 +53,7 @@ public class Order {
         System.out.println("Kund: " + customer.getName());
         System.out.println("Produkter:");
         for (Product p : products) {
-            System.out.println("  - " + p.getName() + " (" + p.getCategory() + "): " + p.getPrice() + " kr");
+            System.out.println("  - " + p.getName() + " (" + p.getPrice() + " kr)");
         }
         System.out.println("Totalt: " + getTotalPrice() + " kr");
     }
