@@ -472,7 +472,7 @@ public class App {
 
         int id = Integer.parseInt(idStr);
 
-        // Check if ID already exists
+
         for (Customer c : customers) {
             if (c.getId() == id) {
                 JOptionPane.showMessageDialog(parent, "En kund med detta ID finns redan.");
