@@ -22,6 +22,7 @@ classDiagram
         -customer:Customer
         -products: List~Product~
         +addProduct(product:Product)
+        +removeProduct(productId:int): boolean
         +getTotalPrice():double
         +printSummary()
     }
@@ -31,6 +32,7 @@ classDiagram
         +addProduct(product:Product)
         +getById(id:int):Product
         +getAll():List~Product~
+        +printAll()
     }
 
     class OrderService {
