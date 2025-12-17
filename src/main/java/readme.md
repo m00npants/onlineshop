@@ -102,4 +102,4 @@ menu loop with options to view products, create orders, and view order history
 
 cleaner and more modular design
 
-i added this to improve so much easier to read , maintain and expand.
+i added this to improve so its much easier to read , maintain and expand.
