@@ -102,6 +102,7 @@ gonna try add the optional task to
     - Uses loops and a menu with options to view products, create orders, and view order history
     - clenaner and more modular design
     - easier to read , maintain and expand.
+    - you can now remove products from orders
     
 
 
