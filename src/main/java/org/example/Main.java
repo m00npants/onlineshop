@@ -6,7 +6,7 @@ public class Main {
     }
 }
 
-// change to this if you want to run GUI without console seeding
+// change to this if you want to run GUI
 //-----------------------------GUI-----------------------------
 /*public class Main {
      static void main() {
