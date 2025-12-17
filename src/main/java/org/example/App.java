@@ -442,7 +442,7 @@ public class App {
         System.out.println("Redigerar kund: " + customer.getName());
 
         System.out.print("Nytt namn (lämna tomt för att behålla): ");
-        scanner.nextLine(); // clear buffer
+        scanner.nextLine();
         String newName = scanner.nextLine();
 
         System.out.print("Ny email (lämna tomt för att behålla): ");
