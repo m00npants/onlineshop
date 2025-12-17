@@ -31,6 +31,7 @@ public class App {
             System.out.println("5. Ta bort produkt från order");
             System.out.println("6. Lägg till ny kund");
             System.out.println("7. Ta bort kund ");
+            System.out.println("8. Redigera kund");
             System.out.println("0. Avsluta");
             System.out.print("Val: ");
 
@@ -57,6 +58,9 @@ public class App {
                     break;
                 case 7:
                     handleDeleteCustomer();
+                    break;
+                case 8:
+                    handleEditCustomer();
                     break;
                 case 0:
                     System.out.println("Avslutar programmet...");
@@ -406,7 +410,7 @@ public class App {
             return;
         }
 
-        // Optional: block deletion if customer has orders
+
         if (!toRemove.getOrderHistory().isEmpty()) {
             System.out.println("Kunden har orders och kan inte tas bort.");
             return;
@@ -414,6 +418,46 @@ public class App {
 
         customers.remove(toRemove);
         System.out.println("Kunden har tagits bort.");
+    }
+
+    private void handleEditCustomer() {
+        printCustomers();
+        System.out.print("Ange ID på kunden som ska redigeras: ");
+        int id = readInt();
+
+        Customer customer = null;
+
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                customer = c;
+                break;
+            }
+        }
+
+        if (customer == null) {
+            System.out.println("Ingen kund med detta ID.");
+            return;
+        }
+
+        System.out.println("Redigerar kund: " + customer.getName());
+
+        System.out.print("Nytt namn (lämna tomt för att behålla): ");
+        scanner.nextLine(); // clear buffer
+        String newName = scanner.nextLine();
+
+        System.out.print("Ny email (lämna tomt för att behålla): ");
+        String newEmail = scanner.nextLine();
+
+        if (!newName.isEmpty()) {
+            customer.setName(newName);
+        }
+
+        if (!newEmail.isEmpty()) {
+            customer.setEmail(newEmail);
+        }
+
+        System.out.println("Kunden har uppdaterats:");
+        System.out.println(customer);
     }
 
     //-----------------------------GUI-----------------------------
