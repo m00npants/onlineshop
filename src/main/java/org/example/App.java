@@ -29,7 +29,8 @@ public class App {
             System.out.println("3. Skapa order för kund");
             System.out.println("4. Visa orders för kund");
             System.out.println("5. Ta bort produkt från order");
-            System.out.println("6. Avsluta");
+            System.out.println("6. Lägg till ny kund");
+            System.out.println("0. Avsluta");
             System.out.print("Val: ");
 
             int choice = readInt();
@@ -51,6 +52,9 @@ public class App {
                     handleRemoveProduct();
                     break;
                 case 6:
+                    handleAddCustomer();
+                    break;
+                case 0:
                     System.out.println("Avslutar programmet...");
                     running = false;
                     break;
@@ -355,9 +359,59 @@ public class App {
         output.setText(order.toText());
     }
 
+    private void handleAddCustomer() {
+        System.out.print("Ange nytt kund-ID: ");
+        int id = readInt();
+
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                System.out.println("En kund med detta ID finns redan.");
+                return;
+            }
+        }
+
+        System.out.print("Ange kundens namn: ");
+        String name = scanner.next();
+
+        System.out.print("Ange kundens email: ");
+        String email = scanner.next();
+
+        Customer newCustomer = new Customer(id, name, email);
+        customers.add(newCustomer);
+
+        System.out.println("Ny kund tillagd:");
+        System.out.println(newCustomer);
+    }
+//GUI
     public void runWithoutConsole() {
         seedCustomers();
         seedProducts();
+    }
+    public void addCustomerSwing(JFrame parent, JTextArea output) {
+
+        String idStr = JOptionPane.showInputDialog(parent, "Ange nytt kund-ID:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+
+        // Check if ID already exists
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                JOptionPane.showMessageDialog(parent, "En kund med detta ID finns redan.");
+                return;
+            }
+        }
+
+        String name = JOptionPane.showInputDialog(parent, "Ange kundens namn:");
+        if (name == null || name.isEmpty()) return;
+
+        String email = JOptionPane.showInputDialog(parent, "Ange kundens email:");
+        if (email == null || email.isEmpty()) return;
+
+        Customer newCustomer = new Customer(id, name, email);
+        customers.add(newCustomer);
+
+        output.setText("Ny kund tillagd:\n" + newCustomer.toString());
     }
 
 
