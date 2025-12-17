@@ -38,18 +38,39 @@ public class App {
 
                     if (selectedCustomer.getId() == 1) {
                         order.addProduct(new Product(1, "Nocco Caribbean", 19.90));
-                        order.addProduct(new Product(2, "Celsius Cola", 19.90));
-                        order.addProduct(new Product(3, "Gaming Headset", 799.00));
+                        order.addProduct(new Product(2, "Nocco Skumtome ", 19.90));
+                        order.addProduct(new Product(3, "Nocco Miami", 29.00));
+                        order.addProduct(new Product(4, "Nocco Passion", 19.90));
+                        order.addProduct(new Product(5, "Nocco Julmust", 19.90));
+                        order.addProduct(new Product(6, "Nocco Ice Soda", 29.00));
+                        order.addProduct(new Product(7, "Nocco Carnival", 19.90));
+                        order.addProduct(new Product(8, "Nocco Del Sol", 19.90));
+                        order.addProduct(new Product(9, "Nocco Melon", 39.00));
+                        order.addProduct(new Product(10, "Nocco Focus", 39.00));
                     }
                     else if (selectedCustomer.getId() == 2) {
-                        order.addProduct(new Product(4, "Penna", 9.90));
-                        order.addProduct(new Product(5, "Anteckningsblock", 29.90));
-                        order.addProduct(new Product(6, "Kontorsstol", 1299.00));
+                        order.addProduct(new Product(1, "Celsius Peach Vibe", 29.90));
+                        order.addProduct(new Product(2, "Celsius Raspberry ", 49.90));
+                        order.addProduct(new Product(3, "Celsius Wild Berry", 39.00));
+                        order.addProduct(new Product(4, "Celsius Kiwi", 25.90));
+                        order.addProduct(new Product(5, "Celsius Orange", 39.90));
+                        order.addProduct(new Product(6, "Celsius Grape", 28.00));
+                        order.addProduct(new Product(7, "Celsius Mango", 25.90));
+                        order.addProduct(new Product(8, "Celsius Strawberry", 29.90));
+                        order.addProduct(new Product(9, "Celsius Citrus", 26.50));
+                        order.addProduct(new Product(10, "Celsius Artic Vibe", 25.50));
                     }
                     else if (selectedCustomer.getId() == 3) {
-                        order.addProduct(new Product(7, "Handväska", 499.00));
-                        order.addProduct(new Product(8, "Solglasögon", 199.00));
-                        order.addProduct(new Product(9, "General start lös", 65.00));
+                        order.addProduct(new Product(1, "Cola", 19.90));
+                        order.addProduct(new Product(2, "Fanta", 19.90));
+                        order.addProduct(new Product(3, "Sprite", 25.50));
+                        order.addProduct(new Product(4, "Julmust", 19.90));
+                        order.addProduct(new Product(5, "Kaffe", 32.90));
+                        order.addProduct(new Product(6, "Latte", 49.00));
+                        order.addProduct(new Product(7, "Choklad", 39.90));
+                        order.addProduct(new Product(8, "Solkräm", 69.90));
+                        order.addProduct(new Product(9, "General lös", 65.00));
+                        order.addProduct(new Product(10, "General portion", 59.00));
                     }
 
                     orders.add(order);
