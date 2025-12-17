@@ -11,7 +11,7 @@ public class Main {
 /*public class Main {
      static void main() {
         App app = new App();
-        app.runWithoutConsole(); // new method that only seeds data
+        app.runWithoutConsole();
         new ShopGUI(app);
     }
 }*/
