@@ -19,3 +19,4 @@ class Customer {
 
     Order "0..*" --> "1" Customer : belongsTo
     Order "1" --> "1..*" Product : contains
+```
