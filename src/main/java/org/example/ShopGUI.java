@@ -18,7 +18,7 @@ public class ShopGUI extends JFrame {
 
         // --- MENU BUTTONS ---
         JPanel menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(6, 1));
+        menuPanel.setLayout(new GridLayout(7, 1));
 
         JButton btnCustomers = new JButton("Visa kunder");
         JButton btnProducts = new JButton("Visa produkter");
@@ -26,6 +26,7 @@ public class ShopGUI extends JFrame {
         JButton btnShowOrders = new JButton("Visa kundens orders");
         JButton btnRemoveProduct = new JButton("Ta bort produkt från order");
         JButton btnAddCustomer = new JButton("Lägg till kund");
+        JButton btnDeleteCustomer = new JButton("Ta bort kund");
 
         menuPanel.add(btnAddCustomer);
         menuPanel.add(btnCustomers);
@@ -33,6 +34,7 @@ public class ShopGUI extends JFrame {
         menuPanel.add(btnCreateOrder);
         menuPanel.add(btnShowOrders);
         menuPanel.add(btnRemoveProduct);
+        menuPanel.add(btnDeleteCustomer);
 
         add(menuPanel, BorderLayout.WEST);
 
@@ -65,6 +67,10 @@ public class ShopGUI extends JFrame {
 
         btnAddCustomer.addActionListener(e -> {
             app.addCustomerSwing(this, output);
+        });
+
+        btnDeleteCustomer.addActionListener(e -> {
+            app.deleteCustomerSwing(this, output);
         });
 
 

@@ -7,7 +7,7 @@ package org.example;
 }*/
 
 // change to this if you want to run GUI without console seeding
-
+//-----------------------------GUI-----------------------------
 public class Main {
      static void main() {
         App app = new App();

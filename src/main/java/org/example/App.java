@@ -30,6 +30,7 @@ public class App {
             System.out.println("4. Visa orders för kund");
             System.out.println("5. Ta bort produkt från order");
             System.out.println("6. Lägg till ny kund");
+            System.out.println("7. Ta bort kund ");
             System.out.println("0. Avsluta");
             System.out.print("Val: ");
 
@@ -53,6 +54,9 @@ public class App {
                     break;
                 case 6:
                     handleAddCustomer();
+                    break;
+                case 7:
+                    handleDeleteCustomer();
                     break;
                 case 0:
                     System.out.println("Avslutar programmet...");
@@ -382,7 +386,37 @@ public class App {
         System.out.println("Ny kund tillagd:");
         System.out.println(newCustomer);
     }
-//GUI
+
+    private void handleDeleteCustomer() {
+        printCustomers();
+        System.out.print("Ange ID på kunden som ska tas bort: ");
+        int id = readInt();
+
+        Customer toRemove = null;
+
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                toRemove = c;
+                break;
+            }
+        }
+
+        if (toRemove == null) {
+            System.out.println("Ingen kund med detta ID.");
+            return;
+        }
+
+        // Optional: block deletion if customer has orders
+        if (!toRemove.getOrderHistory().isEmpty()) {
+            System.out.println("Kunden har orders och kan inte tas bort.");
+            return;
+        }
+
+        customers.remove(toRemove);
+        System.out.println("Kunden har tagits bort.");
+    }
+
+    //-----------------------------GUI-----------------------------
     public void runWithoutConsole() {
         seedCustomers();
         seedProducts();
@@ -412,6 +446,37 @@ public class App {
         customers.add(newCustomer);
 
         output.setText("Ny kund tillagd:\n" + newCustomer.toString());
+    }
+
+    public void deleteCustomerSwing(JFrame parent, JTextArea output) {
+
+        String idStr = JOptionPane.showInputDialog(parent, "Ange ID på kunden som ska tas bort:");
+        if (idStr == null) return;
+
+        int id = Integer.parseInt(idStr);
+
+        Customer toRemove = null;
+
+        for (Customer c : customers) {
+            if (c.getId() == id) {
+                toRemove = c;
+                break;
+            }
+        }
+
+        if (toRemove == null) {
+            JOptionPane.showMessageDialog(parent, "Ingen kund med detta ID.");
+            return;
+        }
+
+        if (!toRemove.getOrderHistory().isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "Kunden har orders och kan inte tas bort.");
+            return;
+        }
+
+        customers.remove(toRemove);
+
+        output.setText("Kunden har tagits bort:\n" + toRemove.toString());
     }
 
 
